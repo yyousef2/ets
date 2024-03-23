@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Course</title>
+</head>
+
+<body>
+    <header>
+        <div class="navbar" id="nav">
+            <div class="navbar-right">
+                <a href="/student/home">Home</a>
+                <a href="/student/course" class="active">Course</a>
+                <a href="/student/grade">Grade</a>
+                <a href="/student/assignment">Assignment</a>
+                <a href="/student/logout">Logout</a>
+                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        </div>
+    </header>
+    <section class="AboutUsBox">
+        <h1>
+            Edit Course Detail
+        </h1>
+        <form action="/student/updateCourse" method="post">
+            <input type="hidden" value="<%=record.id%>" name="courseId" >
+            <label for="email"><b>Course Name</b></label>
+            <input type="text" placeholder="Enter course name" value="<%=record.name%>" name="courseName" required>
+            <br>
+            <label for="email"><b>Instructor Name</b></label>
+            <input type="text" placeholder="Enter instructor name" value="<%=record.instructor%>" name="instructorName" required>
+            <br>
+            <label for="email"><b>Course Description</b></label>
+            <input type="text" placeholder="Enter course description" value="<%=record.description%>"  name="courseDescription" required>
+            <br>
+            <label for="email"><b>Semester / term</b></label>
+            <input type="text" placeholder="Enter Semester / Term" value="<%=record.semester%>" name="semester_term" required>
+            <br>
+            <br>
+            <input type="submit" value="Save">
+        </form>
+    </section>
+</body>
+
+</html>

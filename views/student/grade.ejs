@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Grade</title>
+</head>
+
+<body>
+    <header>
+        <div class="navbar" id="nav">
+            <div class="navbar-right">
+                <a href="/student/home">Home</a>
+                <a href="/student/course">Course</a>
+                <a href="/student/grade" class="active" >Grade</a>
+                <a href="/student/assignment">Assignment</a>
+                <a href="/student/logout">Logout</a>
+                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        </div>
+    </header>
+    <section class="AboutUsBox">
+        <button id="myBtn" class="btn">Add New Grade</button>
+    </section>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <section class="formBox">
+                <h1>
+                    Enter Grade Details
+                </h1>
+                <form action="/student/addNewGrade" method="post" >
+                    <label><b>Course Name</b></label>
+                    <select name="courseName" required>
+                        <% courseNames.forEach(function(row) { %>
+                            <option value="<%- row.name %>"><%- row.name %></option>
+                        <% }); %>
+                    </select>
+                    <br>
+                    <label><b>Grade Type</b></label>
+                    <select name="gradeType" required>
+                        <option value="Assignment">Assignment</option>
+                        <option value="Quizzes">Quizzes</option>
+                        <option value="Exams">Exams</option>
+                    </select>
+                    <br>
+                    <label><b>Obtained Marks</b></label>
+                    <input type="text" placeholder="Enter obtained marks" name="obtainedMarks" required>
+                    <br>
+                    <label><b>Total Marks</b></label>
+                    <input type="text" placeholder="Enter total marks" name="totalMarks" required>
+                    <br>
+                    <label><b>Date</b></label>
+                    <input type="date" name="gradeDate" required>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="submit" value="Save">
+                </form>
+            </section>
+
+
+        </div>
+
+    </div>
+    <section class="AboutUsBox">
+        <h1>
+            Manage Grade
+        </h1>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Course Name</th>
+                    <th>Type</th>
+                    <th>Obtained Marks</th>
+                    <th>Total Marks</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% record.forEach(function(row) { %>
+                    <tr>
+                        <td><%- row.id %></td>
+                        <td><%- row.course %></td>
+                        <td><%- row.type %></td>
+                        <td><%- row.obtainedMarks %></td>
+                        <td><%- row.totalMarks %></td>
+                        <td><%- row.date %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </section>
+
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

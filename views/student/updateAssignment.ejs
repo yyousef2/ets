@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Assignment</title>
+</head>
+
+<body>
+    <header>
+        <div class="navbar" id="nav">
+            <div class="navbar-right">
+                <a href="/student/home">Home</a>
+                <a href="/student/course">Course</a>
+                <a href="/student/grade">Grade</a>
+                <a href="/student/assignment" class="active">Assignment</a>
+                <a href="/student/logout">Logout</a>
+                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        </div>
+    </header>
+    <section class="AboutUsBox">
+        <h1>
+            Update Assignment Detail
+        </h1>
+
+        <form action="/student/assignment/updateAssignment" method="post">
+            <label><b>Assignment Name</b></label>
+            <input type="hidden" value="<%=record.id%>" name="assignmentId" />
+            <input type="text" placeholder="Enter assignment name" value="<%=record.name%>" name="assignmentName" required>
+            <br>
+            <label><b>Course Name</b></label>
+            <select name="courseName" required>
+                <% courseNames.forEach(function(row) { %>
+                    <option value="<%- row.name %>" <% if(row.name === record.course) { %> selected <% } %>><%- row.name %></option>
+                <% }); %>
+            </select>
+            
+            <br>
+            <label><b>Due Date</b></label> <br> <br>
+            <input type="date" value="<%= record.dueDate %>" name="dueDate" required>
+            <br>
+            <br>
+            <label><b>Description</b></label>
+            <input type="text" value="<%=record.description%>" name="description">
+            <br>
+            <input type="submit" value="Save">
+        </form>
+
+
+
+
+    </section>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>SignUp</title>
+</head>
+<body>
+    <header>
+        <div class="navbar" id="nav">
+            <div class="navbar-right">
+                <a href="/student/login" >Login</a>
+                <a href="/student/signup" class="active">SignUp</a>
+                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        </div>
+    </header>
+    <section style="display: flex; flex: 1; justify-content: center; align-items: center; padding: 2% 0; " >
+        <div class="LoginBox" >
+            <h1>
+                Student Sign Up
+            </h1>
+            <form method="post">
+                <label for="email"><b>Name</b></label>
+                <input type="text" placeholder="Enter Name" name="name" required>
+                <br>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+                <br>
+                <label for="email"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <br>
+                <br>
+                <input type="submit" value="Sign Up">
+               
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>

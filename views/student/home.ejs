@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <header>
+        <div class="navbar" id="nav">
+            <div class="navbar-right">
+                <a href="/student/home" class="active">Home</a>
+                <a href="/student/course">Course</a>
+                <a href="/student/grade">Grade</a>
+                <a href="/student/assignment">Assignment</a>
+                <a href="/student/logout">Logout</a>
+                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        </div>
+    </header>
+    <section class="Dashboard">
+        <h1>
+            Welcome Education Tracking
+            System
+        </h1>
+        <div style="display: flex;flex-direction: row;justify-content: flex-end;align-items: center;">
+            <button id="myBtn" class="btn" style="width: 20%;">GPA Calculator</button>
+        </div>
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <section class="formBox">
+                    <h1>GPA Calculator</h1>
+                    <form id="gpaForm">
+                        <% for (let i=1; i <=5; i++) { %>
+                            <div style="display: flex;flex-direction: column;gap: 2px;padding: 0;margin: 0;">
+                                <label for="course<%= i %>"><b>Course Name <%= i %></b></label>
+                                <input type="text" placeholder="Enter course name" name="courseName<%= i %>" required>
+                                <br>
+                                <label for="grade<%= i %>"><b>Grade <%= i %></b></label>
+                                <input type="text" placeholder="Enter grade (0-100)" name="grade<%= i %>" min="0"
+                                    max="100" required>
+                                <br>
+                                <label for="credit<%= i %>"><b>Credit Hours <%= i %></b></label>
+                                <input type="text" placeholder="Enter credit hours" name="credit<%= i %>" required>
+                                <br><br>
+                            </div>
+
+                            <% } %>
+
+                    </form>
+                    <input type="button" id="calculateButton" value="Calculate GPA">
+                </section>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="DashboardStatsRow">
+            <div class="item">
+                <p>
+                    <%=gradeCounts.Quizzes%>
+                </p>
+                <h3>Total Quizzes</h3>
+            </div>
+            <div class="item">
+                <p>
+                    <%=totalApplication%>
+                </p>
+                <h3>Total Assigment</h3>
+            </div>
+            <div class="item">
+                <p>
+                    <%=totalCourse%>
+                </p>
+                <h3>Total Course</h3>
+            </div>
+            <div class="item">
+                <p>
+                    <%=gradeCounts.Exams%>
+                </p>
+                <h3>Total Exams</h3>
+            </div>
+        </div>
+
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+        <h2>Grade Counts</h2>
+
+
+        <h2>GPA Calculator</h2>
+        <form action="/calculateGPA" method="post">
+            <% for (let i=1; i <=5; i++) { %>
+                <label for="course<%= i %>">Course <%= i %></label>
+                <input type="text" id="course<%= i %>" name="course<%= i %>" placeholder="Course Name" required>
+                <input type="number" id="grade<%= i %>" name="grade<%= i %>" placeholder="Grade (0-100)" min="0"
+                    max="100" required>
+                <input type="number" id="credit<%= i %>" name="credit<%= i %>" placeholder="Credit Hours" min="0"
+                    required>
+                <br>
+                <% } %>
+                    <button type="submit">Calculate GPA</button>
+        </form>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2024-03-30', '2024-03-30', '2024-03-30'],
+                datasets: [{
+                    label: 'Quizzes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Assignment',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Exams',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#calculateGPA").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/calculateGPA",
+                type: "GET",
+                success: function(response) {
+                    $("#gpaResult").text("Your GPA is: " + response.gpa);
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>
